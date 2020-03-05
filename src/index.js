@@ -1,52 +1,90 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
-import TodoItem from './TodoItem'
+// import TodoItem from './TodoItem'
 import * as serviceWorker from './serviceWorker';
 
-import todosData from './todosData';
+import Conditional from './Conditional';
 
 
-class App extends React.Component  {
+// import todosData from './todosData';
 
+
+// class App extends React.Component  {
+
+//     constructor() { 
+//         super()
+//         this.state = { 
+//             todos: todosData
+//         }
+//         this.handleChange = this.handleChange.bind(this)
+//     }
+
+//     handleChange(id) { 
+//         console.log("changed",id)
+//         this.setState(prevState => {
+//             const updatedTodos = prevState.todos.map(todo =>{ 
+//                 if (todo.id === id) {
+//                     todo.completed = !todo.completed
+//                 }
+//                 return todo
+//             })
+//             return {
+//                 todos:updatedTodos
+//             }
+//         })
+//     }
+
+//     render() { 
+//         const TodoItems = this.state.todos.map(item => <TodoItem key= {item.id} item={item} handleChange={this.handleChange} />)
+//         return (
+//             <div className='todo-list'>
+//             {TodoItems}
+//             </div>
+//         )     
+        
+//     }
+// }
+
+class TodoList extends Component {
     constructor() { 
         super()
-        this.state = { 
-            todos: todosData
+        this.state = {
+            isLoading: true
         }
-        this.handleChange = this.handleChange.bind(this)
     }
 
-    handleChange(id) { 
-        console.log("changed",id)
-        this.setState(prevState => {
-            const updatedTodos = prevState.todos.map(todo =>{ 
-                if (todo.id === id) {
-                    todo.completed = !todo.completed
-                }
-                return todo
-            })
-            return {
-                todos:updatedTodos
-            }
-        })
+   
+
+    componentDidMount() {
+        // Mounting時
+        // 1度目のrenderが呼ばれた後に1度だけ呼ばれるメソッドです。
+        // この時点ではまだUIに表示されていません。
+        // データをフェッチしたり、アニメーションやタイマーをセットする場合はここで行います。
+        // このメソッドからはDOMが作成されていますが、直接のDOM操作などライフサイクルを外れる処理は原則避けましょう。
+        setTimeout(() => {this.setState({
+            isLoading: false
+        })},1500)
     }
 
-    render() { 
-        const TodoItems = this.state.todos.map(item => <TodoItem key= {item.id} item={item} handleChange={this.handleChange} />)
+
+    render(){
+        // ここに書いてあるコードが実際にUIに現れるものになります。
+        // そしてAPIのように、propsやstateの値が変わっても結果は冪等であるべきです。
         return (
-            <div className='todo-list'>
-            {TodoItems}
+            <div>
+                {this.state.isLoading ?
+                <h1>now Loading....</h1> :
+                <Conditional />
+                }
             </div>
-        )     
-        
+        )
     }
 }
 
-
 ReactDOM.render(
-    <App />,
+    <TodoList />,
     document.getElementById("root")
 )
 
