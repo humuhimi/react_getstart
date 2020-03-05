@@ -8,17 +8,22 @@ class App extends React.Component {
 
     constructor() {
         super()
-        // this.props.answer = "Yes"　//こういうのは無理
         this.state = {
-            answer: "Yes"
+            answer: "Yes",
+            isLoggedIn: true
         }
     }
     render() {
+        let wordDisplay
+        if (this.state.isLoggedIn === true) {
+            wordDisplay = "in"
+        } else {
+            wordDisplay = "out"
+        }
         return (
             <div>
                 <h1>about state: {this.state.answer} </h1>
-                {/* 下の階層にまでstateが引き継がれる */}
-                <ChildComponent answer={this.state.answer} />
+                <h2>you are logged {wordDisplay}</h2>
             </div>
         )
     }
