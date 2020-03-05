@@ -2,57 +2,46 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
+import TodoItem from './TodoItem'
 import * as serviceWorker from './serviceWorker';
 
-class App extends React.Component {
+import todosData from './todosData';
 
-    constructor() {
+
+class App extends React.Component  {
+
+    constructor() { 
         super()
-        this.state = {
-            answer: "Yes",
-            isLoggedIn: true,
-            count: 0
+        this.state = { 
+            todos: todosData
         }
-        this.handleClick = this.handleClick.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
-    handleClick() {
-        console.log('clicked')
-        // setStateを使うには関数を元のクラスにバインドする必要がある
-        // それによりsetStateを持ってこれる
-        // 中に関数を定義する
+
+    handleChange(id) { 
+        console.log("changed",id)
         this.setState(prevState => {
-                return {
-                    count : prevState.count + 1
+            const updatedTodos = prevState.todos.map(todo =>{ 
+                if (todo.id === id) {
+                    todo.completed = !todo.completed
                 }
+                return todo
+            })
+            return {
+                todos:updatedTodos
+            }
         })
     }
 
-    render() {
-        let wordDisplay
-        if (this.state.isLoggedIn === true) {
-            wordDisplay = "in"
-        } else {
-            wordDisplay = "out"
-        }
+    render() { 
+        const TodoItems = this.state.todos.map(item => <TodoItem key= {item.id} item={item} handleChange={this.handleChange} />)
         return (
-            <div>
-                <img onMouseOver={() => console.log("hovered!!")} src="https://picsum.photos/seed/picsum/200/300" alt="some_moutain"/>
-                <h1>about state: {this.state.answer} </h1>
-                <h2>you are logged {wordDisplay}</h2>
-                <h1><strong>{ this.state.count } </strong></h1>
-                <button onClick={this.handleClick}>Click here</button>
+            <div className='todo-list'>
+            {TodoItems}
             </div>
-        )
+        )     
+        
     }
-  }
-
-function TodoItem(props) {
-    return (
-        <div className="todo-item">
-            <input type="checkbox" checked={props.item.completed} onChange={() => props.handleChange(props,item.id)} />
-        </div>
-    )
-    
 }
 
 
