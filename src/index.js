@@ -6,36 +6,24 @@ import * as serviceWorker from './serviceWorker';
 
 class App extends React.Component {
 
+    constructor() {
+        super()
+        // this.props.answer = "Yes"　//こういうのは無理
+        this.state = {
+            answer: "Yes"
+        }
+    }
     render() {
         return (
             <div>
-                <Header username="humuhimi"/>
-                <h1>Code here</h1>
-                <Greeting />
+                <h1>about state: {this.state.answer} </h1>
+                {/* 下の階層にまでstateが引き継がれる */}
+                <ChildComponent answer={this.state.answer} />
             </div>
         )
     }
   }
 
-class Header extends React.Component {
-    render() {
-        return (
-            <header>
-                <p>Wellcome,{this.props.username} </p>
-            </header>
-        )
-    }
-}
-
-class Greeting extends React.Component { 
-    render () {
-        const date = new Date()
-        const hour = date.getHours()
-        return (
-            <h1>Hi It's {hour} am</h1>
-        )
-    }
-}
 
 
 ReactDOM.render(
