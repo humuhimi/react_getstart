@@ -46,6 +46,14 @@ class App extends React.Component {
     }
   }
 
+function TodoItem(props) {
+    return (
+        <div className="todo-item">
+            <input type="checkbox" checked={props.item.completed} onChange={() => props.handleChange(props,item.id)} />
+        </div>
+    )
+    
+}
 
 
 ReactDOM.render(
