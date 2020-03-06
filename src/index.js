@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 // import './index.css';
 // import App from './App';
-// import TodoItem from './TodoItem'
 import * as serviceWorker from './serviceWorker';
 
-import Conditional from './Conditional';
+import FormContainer from './FormContainer';
 
+import Header from './components/Header'
 
+// import Conditional from './Conditional';
+
+// import TodoItem from './TodoItem'
 // import todosData from './todosData';
 
 
@@ -18,6 +21,8 @@ import Conditional from './Conditional';
 //         this.state = { 
 //             todos: todosData
 //         }
+
+
 //         this.handleChange = this.handleChange.bind(this)
 //     }
 
@@ -47,44 +52,92 @@ import Conditional from './Conditional';
 //     }
 // }
 
-class TodoList extends Component {
-    constructor() { 
-        super()
-        this.state = {
-            isLoading: true
-        }
-    }
+// class App extends React.Component {
+//     constructor(){
+//         super()
+//         this.state = {
+//             loading : false,
+//             character:{}
+//         }
+
+//     }
+//     componentDidMount() {
+//         this.setState({loading: true})
+//             fetch("https://swapi.co/api/people/1")
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     this.setState({
+//                         loading: false,
+//                         character : data
+//                     })
+//                 })
+//     }
+//     render(){
+//         const text = this.state.loading ? 'loading....' : this.state.character.name
+//         return(
+//             <div>
+//                 {text}
+//             </div>
+
+//         )
+//     }
+// }
+
+
+
+
+// class TodoList extends Component {
+//     constructor() { 
+//         super()
+//         this.state = {
+//             isLoading: true,
+//             unreadMessages: ['a','b']
+//         }
+//     }
 
    
 
-    componentDidMount() {
-        // Mounting時
-        // 1度目のrenderが呼ばれた後に1度だけ呼ばれるメソッドです。
-        // この時点ではまだUIに表示されていません。
-        // データをフェッチしたり、アニメーションやタイマーをセットする場合はここで行います。
-        // このメソッドからはDOMが作成されていますが、直接のDOM操作などライフサイクルを外れる処理は原則避けましょう。
-        setTimeout(() => {this.setState({
-            isLoading: false
-        })},1500)
-    }
+//     componentDidMount() {
+//         // Mounting時
+//         // 1度目のrenderが呼ばれた後に1度だけ呼ばれるメソッドです。
+//         // この時点ではまだUIに表示されていません。
+//         // データをフェッチしたり、アニメーションやタイマーをセットする場合はここで行います。
+//         // このメソッドからはDOMが作成されていますが、直接のDOM操作などライフサイクルを外れる処理は原則避けましょう。
+//         setTimeout(() => {this.setState({
+//             isLoading: false
+//         })},1500)
+//     }
 
 
-    render(){
-        // ここに書いてあるコードが実際にUIに現れるものになります。
-        // そしてAPIのように、propsやstateの値が変わっても結果は冪等であるべきです。
-        return (
-            <div>
-                {this.state.isLoading ?
-                <h1>now Loading....</h1> :
-                <Conditional />
-                }
-            </div>
-        )
-    }
+//     render(){
+//         // ここに書いてあるコードが実際にUIに現れるものになります。
+//         // そしてAPIのように、propsやstateの値が変わっても結果は冪等であるべきです。
+//         return (
+//             <div>
+//             {this.state.unreadMessages.length > 0 && 
+//             <h2>
+//             you have {this.state.unreadMessages.length} unread messeages!!
+//             </h2>
+//             }
+//             </div>
+//         )
+//     }
+// }
+
+function App() {
+    return(
+        <div>
+        <Header />
+        <FormContainer /> 
+        </div>
+        
+        
+    )
 }
 
+
 ReactDOM.render(
-    <TodoList />,
+    <App />,
     document.getElementById("root")
 )
 
@@ -94,4 +147,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
 

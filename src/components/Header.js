@@ -2,8 +2,9 @@ import React from "react"
 
 function Header() { 
     return (
-        <header className= "navbar">
-            <h3>this is header</h3>
+        <header>
+            <img src="http://www.pngall.com/wp-content/uploads/3/Art-Transparent.png" alt='sample' />
+            <p>simple Form</p>
         </header>
     )
 }
